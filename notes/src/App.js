@@ -34,11 +34,21 @@ const App = () => {
     const newNotes = [...notes, newNote]; //cria um novo array ao invés de upar o array antigo
     setNotes(newNotes);
 
-  };
+  }; // prop drilling 
+
+  const deleteNote = (id) =>{
+    const newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
+
+  }
 
   return (
     <div className="container">
-      <NotesList notes={notes} handleAddNote={addNote} />
+      <NotesList 
+      notes={notes} 
+      handleAddNote={addNote} 
+      handleDeleteNote={deleteNote}
+      />
     </div>
   );
 };
