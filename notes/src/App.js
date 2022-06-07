@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import NotesList from './components/NotesList';
+import Search from './components/Search';
+import Header from './components/Header';
 
 const App = () => {
   const [notes, setNotes] = useState([{
@@ -24,6 +26,8 @@ const App = () => {
     date: "07/06/2022"
   }]);
 
+  const [searchText, setSearchText] = useState("");
+
   const addNote = (text) => {
     const date = new Date();
     const newNote = {
@@ -36,7 +40,7 @@ const App = () => {
 
   }; // prop drilling 
 
-  const deleteNote = (id) =>{
+  const deleteNote = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
 
@@ -44,10 +48,13 @@ const App = () => {
 
   return (
     <div className="container">
-      <NotesList 
-      notes={notes} 
-      handleAddNote={addNote} 
-      handleDeleteNote={deleteNote}
+      <Header/>
+      <Search handleSearchNote={setSearchText} />
+      <NotesList
+        notes={notes.filter((note) => note.text.toLowerCase().includes(searchText)
+        )}
+        handleAddNote={addNote}
+        handleDeleteNote={deleteNote}
       />
     </div>
   );
