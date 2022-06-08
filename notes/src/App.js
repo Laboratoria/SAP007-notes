@@ -46,10 +46,11 @@ const App = () => {
     );
   }, [notes]); //salva notas no localstorage, precisa ser trocado pelo firebase
 
-  const addNote = (text) => {
+  const addNote = (title, text) => {
     const date = new Date();
     const newNote = {
       id: nanoid(),
+      title: title,
       text: text,
       date: date.toLocaleDateString()
     }

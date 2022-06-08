@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const AddNote = ({ handleAddNote }) => {
-    const [noteText, setNoteText] = useState('');
+    const [noteText, setNoteText, setNoteTitle] = useState('');
     const characterLimit = 200;
 
     const handleChange = (event) => {
@@ -11,6 +11,7 @@ const AddNote = ({ handleAddNote }) => {
     const handleSaveClick = () => {
         if (noteText.trim().length > 0) {
             handleAddNote(noteText); //função que impede de salvar a nota vazia
+            setNoteTitle('');
             setNoteText(''); //esvazia a nota ao salvar
         }
     };
